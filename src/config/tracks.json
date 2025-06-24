@@ -1,0 +1,28 @@
+{
+  "tracks": [
+    {
+      "id": "red_bull_ring",
+      "displayName": "Red Bull Ring",
+      "transform": {
+        "x": -9,
+        "y": 11,
+        "scale": 0.8,
+        "rotation": 0.02
+      },
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Red_Bull_Ring%2C_April_18%2C_2018_SkySat.jpg",
+      "referenceLapUrl": "https://raw.githubusercontent.com/qwertysd-cmd/Portfolio/main/file_E.%20Cavalli.json"
+    },
+    {
+      "id": "spa",
+      "displayName": "Spa-Francorchamps",
+      "transform": {
+        "x": 5,
+        "y": 10,
+        "scale": 0.75,
+        "rotation": -0.1
+      },
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Spa-Francorchamps_of_Belgium.jpg",
+      "referenceLapUrl": "https://raw.githubusercontent.com/qwertysd-cmd/Portfolio/main/file_E.%20Cavalli.json"
+    }
+  ]
+}

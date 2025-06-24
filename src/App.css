@@ -1,0 +1,799 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0; /* Remove body padding */
+    background-color: #1a1a1a;
+    color: #fff;
+}
+.App {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Consistent gap */
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 20px; /* Add padding to the main container */
+    min-height: 100vh; /* Ensure container takes full height */
+    box-sizing: border-box;
+}
+
+/* Header Styles */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #444;
+    margin-bottom: 15px;
+}
+
+.header-title-link {
+    text-decoration: none;
+    color: #fff;
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: 1.8em;
+    color: #00aaff; /* Accent color */
+}
+
+.app-header nav {
+    display: flex;
+    gap: 20px;
+}
+
+.app-header nav a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.app-header nav a:hover,
+.app-header nav a.active { /* Add class for active link if using NavLink */
+    color: #fff;
+    background-color: #333;
+}
+
+
+/* Homepage Styles */
+.homepage {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+}
+
+.homepage h2 {
+    color: #00aaff;
+    margin-bottom: 15px;
+}
+
+.homepage p {
+    font-size: 1.1em;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+
+.homepage-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.action-button {
+    display: inline-block;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-width: 200px; /* Ensure buttons have a good size */
+}
+
+.action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.analyze-button {
+    background-color: #007bff;
+}
+.analyze-button:hover {
+    background-color: #0069d9;
+}
+
+.generate-button {
+    background-color: #28a745;
+}
+.generate-button:hover {
+    background-color: #218838;
+}
+
+
+/* JSON Generator Page Styles */
+.json-generator-page {
+    padding: 20px;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+}
+.json-generator-page h2 {
+     color: #00aaff;
+     margin-bottom: 10px;
+}
+.json-generator-page .control-section {
+    margin-top: 20px;
+}
+.status-message {
+    color: #28a745;
+    margin-top: 10px;
+}
+.error-message {
+    color: #dc3545;
+    margin-top: 10px;
+}
+
+
+/* Existing styles adjustment */
+.main-display-area {
+    display: grid;
+    grid-template-columns: auto 280px; /* Canvas auto-fills, Telemetry fixed width */
+    grid-template-rows: auto auto; /* Row for canvas/telemetry, row for controls */
+    gap: 10px;
+    /* margin-top: 10px; */ /* Removed, handled by container gap */
+    /* Consider setting a max-height or aspect-ratio for the grid area if needed */
+    height: calc(100vh - 250px); /* Example: Adjust based on header/footer/padding */
+    min-height: 500px; /* Ensure minimum height */
+}
+
+.canvas-container {
+    position: relative;
+    border: 1px solid #555;
+    background-color: #222;
+    overflow: hidden;
+    /* min-height: 500px; */ /* Handled by grid area height */
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+    cursor: default;
+    height: 100%; /* Fill grid cell */
+}
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.telemetry {
+    display: flex;
+    flex-direction: column;
+    background-color: #2a2a2a;
+    padding: 10px;
+    border-radius: 5px;
+    gap: 15px;
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    overflow-y: auto;
+    /* max-height: 65vh; */ /* Remove max-height, let grid handle */
+    height: 100%; /* Fill grid cell */
+    box-sizing: border-box;
+}
+.telemetry-item {
+    text-align: left; /* Align text to the left */
+    width: 100%;
+    border: 1px solid #444;
+    padding: 10px;
+    border-radius: 3px;
+    background-color: #333;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    display: flex; /* Use flexbox for better control */
+    flex-direction: column; /* Stack items vertically */
+    gap: 4px; /* Add small gap between elements */
+}
+.telemetry-item-header {
+    font-weight: bold;
+    margin-bottom: 8px; /* Space below the header */
+    text-align: center; /* Center the header */
+    color: #eee; /* Lighter color for header */
+}
+.telemetry-label {
+    font-size: 0.9em;
+    color: #ccc;
+    /* margin-bottom: 2px; */ /* Reduced margin */
+}
+.progress-bar {
+    height: 18px; /* Slightly smaller bar */
+    width: 100%;
+    background-color: #444;
+    border-radius: 3px;
+    overflow: hidden;
+    /* margin-top: 0; */ /* Removed top margin */
+    /* margin-bottom: 2px; */ /* Reduced margin */
+}
+.progress-fill {
+    height: 100%;
+    background-color: #007bff; /* Default fill (RPM) */
+    transition: width 0.1s;
+}
+.rpm-fill {
+     background-color: #007bff; /* Explicitly set RPM color */
+}
+.throttle-fill {
+    background-color: #28a745;
+}
+.brake-fill {
+    background-color: #dc3545;
+}
+.telemetry-value {
+    font-size: 0.95em;
+    font-weight: bold;
+    text-align: right; /* Align value to the right */
+    margin-top: -18px; /* Position value over the bar (adjust as needed) */
+    padding-right: 5px; /* Add padding so it's not flush right */
+    color: #fff; /* White text */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7); /* Add shadow for readability */
+    pointer-events: none; /* Prevent value from blocking bar interaction if any */
+    height: 18px; /* Match bar height */
+    line-height: 18px; /* Vertically center text */
+}
+.playing-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    grid-row: 2 / 3;
+    grid-column: 1 / 3;
+    background-color: #2a2a2a;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#playPauseBtn {
+    min-width: 70px;
+    text-align: center;
+}
+
+.controls { /* General controls container */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* margin-bottom: 10px; */ /* Handled by container gap */
+    padding: 10px;
+    background-color: #2a2a2a;
+    border-radius: 5px;
+}
+.control-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+label {
+    white-space: nowrap;
+}
+button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+button:hover {
+    background-color: #0069d9;
+}
+button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+
+input[type="file"] {
+    display: none;
+}
+.file-input-label {
+    padding: 5px 10px;
+    background-color: #28a745;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+}
+.file-input-label:hover {
+    background-color: #218838;
+}
+input[type="range"] {
+    width: 100px;
+}
+input[type="number"],
+input[type="text"] { /* Style text inputs too */
+    width: auto; /* Adjust width as needed */
+    min-width: 70px;
+    background-color: #333;
+    color: white;
+    border: 1px solid #555;
+    padding: 5px; /* Increase padding */
+    border-radius: 3px;
+}
+.info {
+    background-color: #2a2a2a;
+    padding: 15px; /* Increase padding */
+    border-radius: 5px;
+    /* margin-top: 10px; */ /* Handled by container gap */
+    font-size: 0.9em;
+    color: #ccc;
+}
+.info ul {
+    margin-top: 5px;
+    padding-left: 20px;
+}
+.info li {
+    margin-bottom: 5px;
+}
+
+.control-section {
+    background-color: #2a2a2a;
+    padding: 15px; /* Increase padding */
+    border-radius: 5px;
+    /* margin-bottom: 10px; */ /* Handled by container gap */
+}
+.control-section h3 {
+    margin-top: 0;
+    margin-bottom: 15px; /* Increase margin */
+    border-bottom: 1px solid #555;
+    padding-bottom: 8px; /* Increase padding */
+    color: #00aaff; /* Accent color */
+}
+.control-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.track-selector {
+  margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.select-track-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.select-track-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+select {
+    background-color: #333;
+    color: white;
+    border: 1px solid #555;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.car-section {
+    border: 1px solid #555;
+    padding: 15px; /* Increase padding */
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.car-section h4 {
+    margin: 0 0 15px 0; /* Increase margin */
+    /* color: #007bff; */ /* Color set inline */
+}
+
+/* Focus Button Styles */
+.focus-btn {
+    background-color: #6c757d;
+    min-width: 80px;
+}
+.focus-btn.active {
+    background-color: #17a2b8;
+}
+.focus-btn:hover {
+    background-color: #5a6268;
+}
+.focus-btn.active:hover {
+    background-color: #138496;
+}
+
+
+.remove-car-btn {
+    background-color: #dc3545; /* Red background */
+    margin-left: auto; /* Pushes button to the right in flex container */
+    color: white; /* Ensure text is visible */
+}
+.remove-car-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+.remove-car-btn:disabled { /* Style for disabled state if needed */
+    background-color: #8b2e3a;
+    cursor: not-allowed;
+}
+.file-name-display {
+    margin-left: 5px;
+    font-style: italic;
+    color: #ccc;
+    max-width: 150px; /* Prevent long names breaking layout */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle; /* Align with button */
+}
+.canvas-grabbing {
+    cursor: grabbing;
+}
+
+.config-toggle-btn {
+    margin-left: 10px;
+    background-color: #555;
+}
+
+.config-toggle-btn:hover {
+    background-color: #666;
+}
+
+.track-config-controls {
+    margin-top: 15px;
+    padding: 10px;
+    border-top: 1px solid #444;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Driver list styling */
+.driver-list-container {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #333;
+    border-radius: 5px;
+    border: 1px solid #444;
+}
+
+.driver-list-container h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #00aaff;
+    font-size: 1.1em;
+}
+
+.driver-list {
+  margin-top: 15px;
+  width: 100%;
+}
+
+.driver-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.driver-button {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.driver-button:hover {
+  background-color: #e0e0e0;
+}
+
+.driver-button.active {
+  background-color: #4CAF50;
+  color: white;
+  border-color: #4CAF50;
+}
+
+.loading-drivers {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  text-align: center;
+  font-style: italic;
+  color: #666;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+button.loading {
+  position: relative;
+  color: transparent;
+}
+
+button.loading::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s infinite linear;
+  top: 50%;
+  left: 50%;
+  margin-top: -10px;
+  margin-left: -10px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Driver selection styling */
+.driver-selection {
+    margin: 15px 0;
+    padding: 10px 15px;
+    background-color: #333;
+    border-radius: 5px;
+    border: 1px solid #444;
+}
+
+.driver-selection h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #00aaff;
+}
+
+.driver-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.driver-button {
+    background-color: #444;
+    border: none;
+    border-radius: 3px;
+    padding: 8px 15px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.driver-button:hover {
+    background-color: #555;
+    transform: translateY(-1px);
+}
+
+.driver-button.selected {
+    background-color: #007bff;
+    font-weight: bold;
+}
+
+/* Telemetry Graph Styles */
+.telemetry-graphs-container {
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 1800px; /* Match container max-width */
+    margin: 0 auto;
+}
+
+.telemetry-graphs {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #2a2a2a;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.telemetry-graph-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.graph-title {
+    font-weight: bold;
+    color: #eee;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.telemetry-graph-canvas {
+    width: 100%;
+    height: 120px;
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 3px;
+    box-sizing: border-box;
+    image-rendering: optimizeSpeed; /* Older versions of Firefox */
+    image-rendering: -moz-crisp-edges; /* Firefox */
+    image-rendering: -webkit-optimize-contrast; /* Safari */
+    image-rendering: optimize-contrast; /* CSS3 specification */
+    image-rendering: crisp-edges; /* CSS4 specification */
+    image-rendering: pixelated; /* CSS4 specification */
+    -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
+}
+
+.graph-controls {
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 1800px; /* Match container max-width */
+    margin: 0 auto;
+}
+
+.graph-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 15px;
+    padding: 10px;
+    border-top: 1px solid #444;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-color {
+    display: inline-block;
+    width: 20px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.legend-label {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #eee;
+}
+
+.small-text {
+    font-size: 0.85em;
+    color: #aaa;
+}
+
+@media (min-width: 992px) {
+    .telemetry-graphs {
+        flex-direction: row;
+    }
+    
+    .telemetry-graph-container {
+        flex: 1;
+    }
+}
+
+/* Track selector enhancements */
+.track-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+select#trackSelect {
+  min-width: 200px;
+  padding: 8px;
+  background-color: #333;
+  color: white;
+  border: 1px solid #555;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+select#trackSelect option {
+  padding: 5px;
+  background-color: #333;
+}
+
+/* Add specific color classes for the cars */
+.eduard-car-color {
+  color: #cc3333; /* Eduardo's red */
+  background-color: #cc3333;
+}
+
+.player-car-color {
+  color: #3366cc; /* Player's blue */
+  background-color: #3366cc;
+}
+
+/* Remove or replace the refresh tracks button styles since we're removing that button */
+.refresh-tracks-btn {
+  display: none; /* Hide the button completely */
+}
+
+/* Improved horizontal toggle switch */
+.car-scale-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 5px 0;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 180px; /* Increased width to accommodate text */
+  height: 30px;
+  background-color: #222;
+  border-radius: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  border: 1px solid #444;
+  overflow: hidden;
+}
+
+.toggle-switch .toggle-option {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #aaa;
+  z-index: 2; /* Ensure text is above the thumb */
+  transition: color 0.3s ease;
+}
+
+.toggle-switch .toggle-thumb {
+  position: absolute;
+  width: 50%;
+  height: 24px;
+  background-color: rgba(59, 130, 246, 0.8);
+  border-radius: 12px;
+  z-index: 1;
+  transition: transform 0.3s ease;
+  top: 3px;
+}
+
+.toggle-switch.adaptive .toggle-thumb {
+  transform: translateX(3px);
+}
+
+.toggle-switch.actual .toggle-thumb {
+  transform: translateX(calc(100% - 3px));
+}
+
+/* Change text color based on active state */
+.toggle-switch.adaptive .adaptive-option,
+.toggle-switch.actual .actual-option {
+  color: white;
+  font-weight: bold;
+}
+
+/* Add semi-transparency to the thumb */
+.toggle-thumb {
+  opacity: 0.9;
+}
