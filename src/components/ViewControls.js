@@ -6,23 +6,28 @@ const ViewControls = React.memo(({
     handleZoomChange,
     handleResetView,
     focusedCarId,
+    handleFocusChange,
     handleSyncCars,
     canSync,
     // Add track configuration props
     trackTransform,
     handleTrackTransformChange,
     carScaleMode,
-    handleCarScaleModeToggle
+    handleCarScaleModeToggle,
+    // Add props for transparency controls
+    cars,
+    handleCarChange,
+    isRefCarVisible
 }) => {
     console.log("Rendering ViewControls");
-    
+
     // Add state for showing/hiding track config controls
     const [showConfigControls, setShowConfigControls] = useState(false);
 
     const toggleConfigControls = () => {
         setShowConfigControls(prev => !prev);
     };
-    
+
     return (
         <div className="control-section">
             <h3>View Controls</h3>
@@ -41,12 +46,12 @@ const ViewControls = React.memo(({
                 >
                     Sync Cars
                 </button>
-                
+
                 {/* Add track config button */}
                 <button onClick={toggleConfigControls} className="config-toggle-btn">
                     {showConfigControls ? 'Hide Track Config' : 'Configure Track'}
                 </button>
-                
+
                 {/* Car Scale Toggle */}
                 <div className="control-item car-scale-toggle">
                     <span>Car Scale:</span>
@@ -60,8 +65,42 @@ const ViewControls = React.memo(({
                         <div className={`toggle-thumb ${carScaleMode}`}></div>
                     </div>
                 </div>
+
+                {/* Opacity Controls */}
+                <div className="control-item">
+                    <span>Opacity:</span>
+                    <div className="control-item">
+                        {cars.map(car => (
+                            <div key={car.id} className="control-item" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', width: '60px' }}>
+                                    <small>{car.id === 0 ? 'Eduardo' : 'You'}</small>
+                                    <small>({Math.round(car.transparency * 100)}%)</small>
+                                </div>
+                                <div style={{ flexGrow: 1 }}>
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max="100"
+                                        step="1"
+                                        value={Math.round(car.transparency * 100)}
+                                        onChange={(e) => handleCarChange(car.id, 'transparency', parseFloat(e.target.value) / 100)}
+                                    />
+                                </div>
+                                <div>
+                                    <button
+                                        onClick={() => handleFocusChange(car.id)}
+                                        className={focusedCarId === car.id ? 'focus-btn active' : 'focus-btn'}
+                                        disabled={car.id === 0 && !isRefCarVisible}
+                                    >
+                                        {focusedCarId === car.id ? 'Unfocus' : 'Focus'}
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
-            
+
             {/* Add track configuration controls */}
             {showConfigControls && (
                 <div className="control-group track-config-controls">

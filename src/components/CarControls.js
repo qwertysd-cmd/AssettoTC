@@ -3,38 +3,34 @@ import CarSection from './CarSection';
 
 function CarControls({
     cars,
-    focusedCarId,
     handleFileChange,
     handleCarNumberChange,
     handleCarChange,
     handleTrailLengthAdjust,
-    handleFocusChange,
     resetCar,
     isRefCarVisible,
     toggleRefCarVisibility
 }) {
     return (
-        <div className="control-section" id="carControls">
-            <h3>Car Telemetry Controls</h3>
-            <div id="carSections">
-                {cars.map((car) => (
-                    <CarSection
-                        key={car.id}
-                        car={car}
-                        focusedCarId={focusedCarId}
-                        handleFileChange={handleFileChange}
-                        handleCarNumberChange={handleCarNumberChange}
-                        handleCarChange={handleCarChange}
-                        handleTrailLengthAdjust={handleTrailLengthAdjust}
-                        handleFocusChange={handleFocusChange}
-                        resetCar={resetCar}
-                        isRefCarVisible={isRefCarVisible}
-                        toggleRefCarVisibility={toggleRefCarVisibility}
-                    />
-                ))}
-            </div>
+        <div className="car-controls control-section">
+            <h2>Car Controls</h2>
+            {cars.map(car => (
+                <CarSection
+                    key={car.id}
+                    car={car}
+                    handleFileChange={handleFileChange}
+                    handleCarNumberChange={handleCarNumberChange}
+                    handleCarChange={handleCarChange}
+                    handleTrailLengthAdjust={handleTrailLengthAdjust}
+                    resetCar={resetCar}
+                    isRefCarVisible={isRefCarVisible}
+                    toggleRefCarVisibility={toggleRefCarVisibility}
+                />
+            ))}
         </div>
     );
 }
+
+
 
 export default CarControls;

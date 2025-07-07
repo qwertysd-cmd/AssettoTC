@@ -1140,12 +1140,10 @@ function TelemetryAnalyzer() {
             
             <CarControls
                 cars={cars}
-                focusedCarId={focusedCarId}
                 handleFileChange={handleFileChange}
                 handleCarNumberChange={handleCarNumberChange}
                 handleCarChange={handleCarChange}
                 handleTrailLengthAdjust={handleTrailLengthAdjust}
-                handleFocusChange={handleFocusChange}
                 resetCar={resetCar}
                 isRefCarVisible={isRefCarVisible}
                 toggleRefCarVisibility={toggleRefCarVisibility}
@@ -1156,12 +1154,16 @@ function TelemetryAnalyzer() {
                 handleZoomChange={handleZoomChange}
                 handleResetView={handleResetView}
                 focusedCarId={focusedCarId}
+                handleFocusChange={handleFocusChange}
                 handleSyncCars={handleSyncCars}
                 canSync={canSync && isRefCarVisible}
                 trackTransform={trackTransform}
                 handleTrackTransformChange={handleTrackTransformChange}
                 carScaleMode={carScaleMode}
                 handleCarScaleModeToggle={handleCarScaleModeToggle}
+                cars={cars}
+                handleCarChange={handleCarChange}
+                isRefCarVisible={isRefCarVisible}
             />
             
             <div className="main-display-area">
@@ -1215,3 +1217,4 @@ function TelemetryAnalyzer() {
 }
 
 export default TelemetryAnalyzer;
+

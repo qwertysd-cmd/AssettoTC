@@ -48,12 +48,6 @@ function CarSection({
                 </div>
             </div>
             <div className="control-group">
-                <div className="control-item">
-                    <label htmlFor={`transparency_${car.id}`}>Transparency:</label>
-                    <input type="range" id={`transparency_${car.id}`} min="0" max="1" step="0.01" value={car.transparency} onChange={(e) => handleCarChange(car.id, 'transparency', parseFloat(e.target.value))} />
-                    <span id={`transparencyValue_${car.id}`}>{Math.round(car.transparency * 100)}%</span>
-                </div>
-                
                 {/* Phase Shift only for user car */}
                 {!isReferenceCar && (
                     <div className="control-item">
@@ -61,16 +55,6 @@ function CarSection({
                         <input type="number" id={`phaseShift_${car.id}`} step="1" value={car.phaseShift} onChange={(e) => handleCarNumberChange(car.id, 'phaseShift', e.target.value)} />
                     </div>
                 )}
-                
-                <div className="control-item">
-                    <button
-                        onClick={() => handleFocusChange(car.id)}
-                        className={isFocused ? 'focus-btn active' : 'focus-btn'}
-                        disabled={isReferenceCar && !isRefCarVisible} // Disable focus if ref car is hidden
-                    >
-                        {isFocused ? 'Unfocus' : 'Focus'}
-                    </button>
-                </div>
                 
                 {/* Show/Hide Toggle for Reference Car */}
                 {isReferenceCar ? (
@@ -88,5 +72,6 @@ function CarSection({
         </div>
     );
 }
+
 
 export default CarSection;
