@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import TelemetryAnalyzer from './pages/TelemetryAnalyzer';
@@ -31,7 +31,7 @@ function App() {
         </main>
 
         <footer>
-          <p>&copy; 2023 Assetto Corsa Track Viewer</p>
+          <p>&copy; 2025 AssettoTC</p>
         </footer>
       </div>
     </BrowserRouter>
