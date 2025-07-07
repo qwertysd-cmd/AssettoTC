@@ -99,6 +99,7 @@ function TelemetryAnalyzer() {
             .catch(error => {
                 console.error("Error fetching track data:", error);
                 setAvailableTracks([]);
+                // Remove any fallback to local config
                 alert(`Error fetching track list: ${error.message}`);
             });
 
