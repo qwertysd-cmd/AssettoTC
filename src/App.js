@@ -11,7 +11,7 @@ function App() {
       <div className="container">
         <header className="app-header">
           <Link to="/" className="header-title-link">
-            <h1>AC Telemetry Suite</h1>
+            <h1>AssettoTC</h1>
           </Link>
           <nav>
             <Link to="/analyze">Analyze</Link>

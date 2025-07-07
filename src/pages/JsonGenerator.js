@@ -141,7 +141,7 @@ function JsonGenerator() {
             <div className="info">
                 <p>Notes:</p>
                 <ul>
-                    <li>Ensure that your replay is pre-trimmed and only includes the lap you want to compare. a little extra before and after is alright, just not too much</li>
+                    <li>To use the "sync" feature, ensure that your replay is pre-trimmed and only includes the lap you want to compare. a little extra before and after is alright, just not too much</li>
                     <li>All processing happens locally in your browser - no data is sent to any server.</li>
                 </ul>
             </div>

@@ -715,4 +715,3 @@ export function downloadJson(jsonData, driverName, replayName) {
   
   return filename;
 }
-
