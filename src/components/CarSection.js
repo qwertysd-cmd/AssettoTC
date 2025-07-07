@@ -12,7 +12,7 @@ function CarSection({
     isRefCarVisible,
     toggleRefCarVisibility
 }) {
-    const isFocused = focusedCarId === car.id;
+    //const isFocused = focusedCarId === car.id;
     const isReferenceCar = car.id === 0;
 
     // Determine display name
@@ -43,11 +43,12 @@ function CarSection({
                 <div className="control-item">
                     <label htmlFor={`trailLength_${car.id}`}>Trail Length:</label>
                     <input type="number" id={`trailLength_${car.id}`} step="100" min="0" value={car.trailLength} onChange={(e) => handleCarNumberChange(car.id, 'trailLength', e.target.value)} />
+                    {/*
                     <button className="decreaseTrailBtn" data-car-id={car.id} onClick={() => handleTrailLengthAdjust(car.id, -100)}>-100</button>
                     <button className="increaseTrailBtn" data-car-id={car.id} onClick={() => handleTrailLengthAdjust(car.id, 100)}>+100</button>
+                    */}
                 </div>
-            </div>
-            <div className="control-group">
+
                 {/* Phase Shift only for user car */}
                 {!isReferenceCar && (
                     <div className="control-item">
@@ -55,9 +56,12 @@ function CarSection({
                         <input type="number" id={`phaseShift_${car.id}`} step="1" value={car.phaseShift} onChange={(e) => handleCarNumberChange(car.id, 'phaseShift', e.target.value)} />
                     </div>
                 )}
+            </div>
+            <div className="control-group">
+
                 
                 {/* Show/Hide Toggle for Reference Car */}
-                {isReferenceCar ? (
+                {/*isReferenceCar ? (
                     <div className="control-item">
                         <button onClick={toggleRefCarVisibility}>
                             {isRefCarVisible ? 'Hide Eduardo' : 'Show Eduardo'}
@@ -67,7 +71,7 @@ function CarSection({
                     <div className="control-item">
                         <button onClick={() => resetCar(car.id)}>Reset Car</button>
                     </div>
-                )}
+                )*/}
             </div>
         </div>
     );

@@ -74,7 +74,7 @@ function JsonGenerator() {
 
     return (
         <div className="json-generator-page">
-            <h2>Parse Replay from Replay</h2>
+            <h2>Parse the replay file</h2>
             <p>Upload an Assetto Corsa replay file (.acreplay) and specify the driver's name to extract their telemetry data.</p>
 
             <div className="control-section">
@@ -141,8 +141,7 @@ function JsonGenerator() {
             <div className="info">
                 <p>Notes:</p>
                 <ul>
-                    <li>Ensure the driver name matches exactly as it appears in the replay.</li>
-                    <li>Processing may take some time depending on the replay size.</li>
+                    <li>Ensure that your replay is pre-trimmed and only includes the lap you want to compare. a little extra before and after is alright, just not too much</li>
                     <li>All processing happens locally in your browser - no data is sent to any server.</li>
                 </ul>
             </div>

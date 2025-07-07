@@ -1197,21 +1197,7 @@ function TelemetryAnalyzer() {
                 setHistoryLength={setHistoryLength}
             />
 
-            <div className="info">
-                <p>Instructions:</p>
-                <ul>
-                    <li>Select a track or upload your own track image. Adjust transform controls as needed.</li>
-                    <li>Load JSON files exported from the Assetto Corsa replay parser for the two cars.</li>
-                    <li>Use mouse wheel to zoom in/out (zooms towards cursor).</li>
-                    <li>Click and drag to pan the view (disabled when a car is focused).</li>
-                    <li>Use the 'Focus'/'Unfocus' button on a car to center it or release focus.</li>
-                    <li>Press Spacebar to Play/Pause.</li>
-                    <li>The car's path is traced: green for throttle, red for braking, grey otherwise.</li>
-                    <li>Adjust trail length and transparency for each car.</li>
-                    <li>Playback attempts to match replay recording interval.</li>
-                    <li>The input graphs show throttle and brake history, adjustable with the history length control.</li>
-                </ul>
-            </div>
+
         </div>
     );
 }

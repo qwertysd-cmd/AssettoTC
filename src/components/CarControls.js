@@ -13,7 +13,7 @@ function CarControls({
 }) {
     return (
         <div className="car-controls control-section">
-            <h2>Car Controls</h2>
+
             {cars.map(car => (
                 <CarSection
                     key={car.id}
